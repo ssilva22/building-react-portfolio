@@ -7,10 +7,17 @@ import 'bootstrap/dist/css/bootstrap.css'
 import NavbarBrand from 'react-bootstrap/NavbarBrand';
 import Nav from 'react-bootstrap/Nav';
 
+
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import About from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+
 class App extends React.Component {
 
   constructor(props) {
     super(props);
+     
     this.state= {
       title: 'Sebastian Silva',
       headerLinks: [
@@ -21,7 +28,7 @@ class App extends React.Component {
       home: {
         title: `Become Unstoppable`,
         subTitle:  `Projects that make a difference`,
-        text: 'Checkout my work :) '
+        text: `Checkout my work `,
       },
       about: {
       title: 'About Me'
@@ -35,7 +42,7 @@ class App extends React.Component {
   render(){
     return (
     <Router>
-      <Container className="p-0" fluid={true}>
+      <Container className="p-3" fluid={true}>
         
         <Navbar className="border-bottom" bg="transparent" expand="lg">
         <Navbar.Brand>Sebastian Silva</Navbar.Brand>
@@ -46,10 +53,16 @@ class App extends React.Component {
             <Link className="nav-link" to="/">Home</Link>
             <Link className="nav-link" to="/about">About</Link>
             <Link className="nav-link" to="/contact">Contact</Link>
+
           </Nav>
           </Navbar.Collapse>
         </Navbar>
 
+        <Route path="/" exact render= {() => <HomePage title={this.state.home.title} subTitle={this.state.home.subTitle} text={this.state.home.text}/>} />
+        <Route path="/about" exact render= {() => <About title={this.state.about.title}/>} />
+        <Route path="/contact" exact render= {() => <ContactPage title={this.state.contact.title}/>} />
+
+        <Footer />
         </Container>
     </Router>
     )
